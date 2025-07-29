@@ -1,0 +1,20 @@
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.bin
+*process_embeddings_copy.py
+*eval_segmentation_copy.py
+ZEUS.egg-info
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# IDE specific files
+.idea/          # For IntelliJ/PyCharm
+.vscode/        # For VS Code
+*.swp           # For Vim
+*~              # Temporary files
+.DS_Store       # macOS files
