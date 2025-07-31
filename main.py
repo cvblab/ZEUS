@@ -35,7 +35,7 @@ if __name__ == "__main__":
         print(f"\nStep 2: Performing segmentation task...\n")
         subprocess.run([
             "python", "inference/process_embeddings.py",
-            "--data", os.path.join(args.data,"regions"),
+            "--data", os.path.join(args.data,"images"),
             "--source", args.save_dir,
             "--pred",  # Perform prediction
             # "--tissue",       # Optional: generate tissue map again if needed
