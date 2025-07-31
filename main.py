@@ -65,8 +65,8 @@ if __name__ == "__main__":
         "--data", args.data,        
         "--exp", args.save_dir,
         "--template_name", args.template_name,
-        "--models", args.models
-        # "--resize_factor", "8"  # Optional resizing of input data
+        "--models", args.models,
+        "--resize_factor", "8"  # Optional resizing of input data
     ], check=True)
 
     print("✅ Pipeline completed.")
