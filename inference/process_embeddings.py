@@ -136,7 +136,7 @@ if __name__ == "__main__":
     processor = Processor(args.template_name, args.source, args.model)
 
     # Create ensemble prompts and compute similarities
-    ensemble = processor.prompt_emsmble(save=True)
+    ensemble = processor.prompt_emsmble()
     processor.similarities(ensemble, save=True)
 
     if args.pred:
