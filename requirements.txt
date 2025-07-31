@@ -4,6 +4,7 @@ torchaudio==2.7.1+cu118
 --extra-index-url https://download.pytorch.org/whl/cu118
 
 einops==0.7.0
+fairscale==0.4.13
 timm==0.9.8
 transformers==4.53.0
 tokenizers==0.21.2
