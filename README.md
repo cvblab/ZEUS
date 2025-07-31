@@ -25,7 +25,7 @@ conda create -n zeus python=3.10.12 -y
 conda activate zeus
 pip install --upgrade pip
 pip install -e .
-pip install -r requirements-txt
+pip install -r requirements.txt
 ```
 
 ## 🚀 **Lauching ZEUS**:
