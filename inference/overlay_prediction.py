@@ -9,7 +9,7 @@ import glob
 
 Image.MAX_IMAGE_PIXELS = None
 
-def load_wsi_and_masks(wsi_path: str, gt_mask_path: str, tissue_path: str, binary_path_dict: dict, resize_factor: float):
+def load_wsi_and_masks(wsi_path: str, gt_mask_path: str, tissue_path: str, binary_path_dict: dict, resize_factor: int):
     """
     Load and resize the WSI, GT mask, and prediction masks to match the size of the binary prediction mask.
     If resize_factor is provided, apply it to scale the reference size.
@@ -22,7 +22,7 @@ def load_wsi_and_masks(wsi_path: str, gt_mask_path: str, tissue_path: str, binar
     if resize_factor is None:
         resize_factor = 1.0
 
-    target_size = (int(mask_size[0] * resize_factor), int(mask_size[1] * resize_factor))
+    target_size = (mask_size[0] // resize_factor, mask_size[1] // resize_factor)
 
     wsi = Image.open(wsi_path).convert("RGB").resize(target_size, Image.Resampling.LANCZOS)
     gt_mask = Image.open(gt_mask_path).convert("L").resize(target_size, Image.Resampling.NEAREST)
@@ -32,6 +32,8 @@ def load_wsi_and_masks(wsi_path: str, gt_mask_path: str, tissue_path: str, binar
     binary_masks = {}
     for model, path in binary_path_dict.items():
         mask_image = Image.open(path).convert("L")
+        if resize_factor is not None:
+            mask_image = mask_image.resize(target_size, Image.Resampling.NEAREST)
         mask_arr = np.array(mask_image)
         mask_arr[~tissue_np] = 0
         binary_masks[model] = mask_arr
@@ -74,8 +76,8 @@ def compose_and_save(ov1: Image.Image, ov2: Image.Image, out_path: str, dice_dic
     Combine two overlay images side-by-side and draw a legend with Dice scores and model colors.
     Saves the composed image to the specified output path.
     """
-    legend_scale = 1.8
-    square_scale = 0.4
+    legend_scale = 1.2
+    square_scale = 0.2
 
     w1, h1 = ov1.size
     w2, h2 = ov2.size
@@ -151,7 +153,7 @@ if __name__ == "__main__":
     parser.add_argument('--exp', type=str, required=True, help='Directory to save outputs.')
     parser.add_argument('--template_name', type=str, required=True, help='Experiment template name.')
     parser.add_argument('--models', type=str, required=True, help='Comma-separated model names.')
-    parser.add_argument('--resize_factor', type=float, required=False, default=None, help='Optional resize factor.')
+    parser.add_argument('--resize_factor', type=int, required=False, default=None, help='Optional resize factor.')
 
     args = parser.parse_args()
 
