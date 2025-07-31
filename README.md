@@ -50,7 +50,7 @@ python main.py --data ./data --save_dir ./output --template_name template1 --mod
 ```
 - `--data`: Path to the directory containing your data.
 - `--save/dir ./output`: Output directory where all processed results, tissue masks, coordinates, and embeddings will be saved.
-- `--template_name`: Activates patching mode to tile the WSIs into smaller fixed-size patches.
+- `--template_name`: Name of the textual prompt template (e.g., template1) to define the class descriptions for zero-shot inference.
 - `--models model1,model2`: Comma-separated list of vision–language models to use for embedding extraction (e.g., CONCH, KEEP, MUSK).
 
 > [!NOTE]
