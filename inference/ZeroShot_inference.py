@@ -96,10 +96,10 @@ class Processor:
             
         self.zs_weights = self.zs_weights.cpu().detach().numpy()
         
-        if save:
-            # Save the zero-shot weights for later use
-            np.save("inference/local_data/prompts/ensembles/" + self.project_name +f"_{self.model_name}", self.zs_weights)
-        print("[INFO] Process completed")
+        # if save:
+        #     # Save the zero-shot weights for later use
+        #     np.save("inference/local_data/prompts/ensembles/" + self.project_name +f"_{self.model_name}", self.zs_weights)
+        # print("[INFO] Process completed")
         return self.zs_weights
 
     def similarities(self, ensemble, save = False):
